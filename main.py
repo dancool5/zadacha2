@@ -11,24 +11,20 @@ class MyWidget(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('UI.ui', self)
-        self.f = False
         self.round = []
         self.pushButton.clicked.connect(self.change)
 
     def paintEvent(self, event):
-        if self.f:
-            self.round.append((randint(10, 990), randint(50, 350), randint(10, 50)))
-            painter = QPainter()
-            painter.begin(self)
-            painter.setPen(QPen(Qt.yellow, 8, Qt.SolidLine))
-            painter.setBrush(QBrush(Qt.yellow, Qt.SolidPattern))
-            for i in range(len(self.round)):
-                painter.drawEllipse(self.round[i][0], self.round[i][1], self.round[i][2], self.round[i][2])
-            painter.end()
-            self.f = False
+        painter = QPainter()
+        painter.begin(self)
+        painter.setPen(QPen(Qt.yellow, 8, Qt.SolidLine))
+        painter.setBrush(QBrush(Qt.yellow, Qt.SolidPattern))
+        for i in range(len(self.round)):
+            painter.drawEllipse(self.round[i][0], self.round[i][1], self.round[i][2], self.round[i][2])
+        painter.end()
 
     def change(self):
-        self.f = True
+        self.round.append((randint(10, 990), randint(50, 350), randint(10, 50)))
         self.update()
 
 
